@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.contrib.auth import authenticate,
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as login_django
 from .models import User
 
 def cadastro(request):
@@ -29,7 +30,15 @@ def login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(username=username, password=password)
+        user = authenticate(request, username=username, password=password)
 
-        if user:
-            login_django
+        if user is not None:
+            login_django(request, user)
+            return HttpResponse('Autenticado')
+        else:
+            return HttpResponse('Username ou senha inválido!')
+        
+def listausuarios(request):
+    all_users = User.objects.all()
+    return render(request, 'listausuarios.html', {'usuarios': all_users})
+
