@@ -11,13 +11,13 @@
     <form action="{% url 'cadastro' %}" method="POST">
         {% csrf_token %}
         
-        E-mail:   <input type="email" name="email">
+        E-mail:   <input type="email" name="email" required>
                   <br><br>
-        Username: <input type="text" name="username">
+        Username: <input type="text" name="username" required>
                   <br><br>
-        Senha:    <input type="password" name="password">
+        Senha:    <input type="password" name="password" required>
                   <br><br>
-                  <input type="submit" value="Cadastrar">
+                  <input type="submit" value="Cadastrar" required>
                   
     </form> 
 

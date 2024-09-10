@@ -1,4 +1,4 @@
-from app import views
+from profiles import views
 from django.contrib import admin
 from django.urls import path, include
 
@@ -6,6 +6,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),    
-    path('', views.home, name='home'),
-    path('profiles/', include('profiles.urls'))
+    path('', views.login, name='login'),
+    path('profiles/', include('profiles.urls')),
+    path('app/', include('app.urls'))
 ]

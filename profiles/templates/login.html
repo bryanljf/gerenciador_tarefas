@@ -11,15 +11,16 @@
     <form action="{% url 'login' %}" method="POST">
         {% csrf_token %}
         
-        Username: <input type="text" name="username">
+        Username: <input type="text" name="username" required>
                   <br><br>
-        Senha:    <input type="password" name="password">
+        Senha:    <input type="password" name="password" required>
                   <br><br>
                   <input type="submit" value="Fazer Login">
 
     </form>
 
-    <a href="{% url 'home' %}">Voltar para a Home</a>
+    <br>
+    <a href="{% url 'cadastro' %}">Registrar-se</a>
     
 </body>
 </html>

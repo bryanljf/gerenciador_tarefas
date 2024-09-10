@@ -9,11 +9,16 @@
     <h1>
         Página inicial 'home' -> Construir tela principal contendo opções de (Login, Cadastro, etc)
     </h1>
+        {{ logged_user }}
 
         <a href="{% url 'cadastro' %}">Ir para o cadastro</a>
         <br>
         <a href="{% url 'login' %}">Ir para o login</a>
         <br>
         <a href="{% url 'listausuarios' %}">Ir para lista de usuarios</a>
+        <br>
+        <a href="{% url 'create_task' %}">Ir para criação de tarefas</a>
+        <br>
+        <a href="{% url 'my_tasks' %}">Ir para lista de tarefas</a>
 </body>
 </html>

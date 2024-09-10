@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
-from .models import User
+from django.contrib.auth.models import User
 
 def cadastro(request):
     if request.method == "GET":
@@ -35,6 +35,7 @@ def login(request):
         if user is not None:
             login_django(request, user)
             return HttpResponse('Autenticado')
+        #render(request, 'home.html', {'logged_user': user})
         else:
             return HttpResponse('Username ou senha inválido!')
         
