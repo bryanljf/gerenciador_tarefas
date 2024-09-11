@@ -26,6 +26,18 @@
 <body>
     <h1>Minhas Tarefas</h1>
 
+    <form action="{% url 'my_tasks_filter' status_filter %}" method="POST">
+        {% csrf_token %}
+
+        <label for="status_filter">Filtrar por Status:</label>
+        <select name="status_filter" id="status_filter">
+            <option value="Pendente">Pendente</option>
+            <option value="Em andamento">Em andamento</option>
+            <option value="Concluído">Concluído</option>
+        </select>
+        <input type="submit" value="Filtrar">
+    </form>
+
     <table>
         <thead>
             <tr>

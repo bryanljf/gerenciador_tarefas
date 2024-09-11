@@ -21,23 +21,23 @@ def create_task(request):
         task.save()
 
         return HttpResponse('Tarefa criada com sucesso') 
-        
+
 @login_required
 def my_tasks(request):
-    usuario_atual = request.user
-    all_tasks = Task.objects.filter(assigned_to=usuario_atual)
+    all_tasks = Task.objects.filter(assigned_to=request.user)
     return render(request, 'my_tasks.html', {'tarefas': all_tasks})
 
-# @login_required
-# def edit_task(request, task_name):
-#     edit_task = get_object_or_404(Task, task_name=task_name, assigned_to=request.user)
-#     return render(request, 'manage_task.html', {'edit_task' : edit_task} )
+@login_required
+def my_tasks_filter(request, status):
+    show_tasks = Task.objects.filter(assigned_to=request.user, task_status=status)
+    return render(request, 'my_tasks.html', {'tarefas': show_tasks})
 
 @login_required
 def manage_task(request, id):
         if request.method == "GET":
-            edit_task = Task.objects.filter(id=id)
-            return render(request, 'manage_task.html', {'edit_task': edit_task})
+            task = get_object_or_404(Task, id=id)
+            all_users = User.objects.all()
+            return render(request, 'manage_task.html', {'edit_task': task, 'usuarios': all_users})
         else:
             task_name = request.POST.get('task_name')
             task_desc = request.POST.get('task_desc')
@@ -45,9 +45,13 @@ def manage_task(request, id):
             assigned_to = User.objects.filter(username=assigned_to_username).first()
             task_status = request.POST.get('task_status')
 
-            edit_task = Task.objects.filter(id=id).update(task_name=task_name, task_desc=task_desc, task_status=task_status, assigned_to=assigned_to)
+            Task.objects.filter(id=id).update(task_name=task_name, task_desc=task_desc, task_status=task_status, assigned_to=assigned_to)
             
             return HttpResponse('Tarefa modificada com sucesso') 
         
+@login_required
+def delete_task(request, id):
+    task = get_object_or_404(Task, id=id).delete()
+    return HttpResponse('Tarefa deletada com sucesso') 
 
         
