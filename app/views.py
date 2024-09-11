@@ -1,7 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.urls import reverse
 from .models import Task
 
 def home(request):
@@ -24,13 +25,15 @@ def create_task(request):
 
 @login_required
 def my_tasks(request):
-    all_tasks = Task.objects.filter(assigned_to=request.user)
-    return render(request, 'my_tasks.html', {'tarefas': all_tasks})
+            
+    if request.method == "GET":
+        all_tasks = Task.objects.filter(assigned_to=request.user)
 
-@login_required
-def my_tasks_filter(request, status):
-    show_tasks = Task.objects.filter(assigned_to=request.user, task_status=status)
-    return render(request, 'my_tasks.html', {'tarefas': show_tasks})
+        return render(request, 'my_tasks.html', {'tarefas': all_tasks})
+    else:
+        status = request.POST.get('status_filter')
+        show_tasks = Task.objects.filter(assigned_to=request.user, task_status=status)
+        return render(request, 'my_tasks.html', {'tarefas': show_tasks, 'selected_status': status})
 
 @login_required
 def manage_task(request, id):
@@ -47,11 +50,23 @@ def manage_task(request, id):
 
             Task.objects.filter(id=id).update(task_name=task_name, task_desc=task_desc, task_status=task_status, assigned_to=assigned_to)
             
-            return HttpResponse('Tarefa modificada com sucesso') 
+            all_tasks = Task.objects.filter(assigned_to=request.user)
+
+            return render(request, 'my_tasks.html', {'tarefas': all_tasks})
         
 @login_required
 def delete_task(request, id):
-    task = get_object_or_404(Task, id=id).delete()
-    return HttpResponse('Tarefa deletada com sucesso') 
+    get_object_or_404(Task, id=id).delete()
+    return redirect(reverse('my_tasks'))
+
+@login_required
+def all_tasks(request):
+    if request.method == "GET":
+        all_tasks = Task.objects.all()
+        return render(request, 'all_tasks.html', {'tarefas': all_tasks})
+    else:
+        status = request.POST.get('status_filter')
+        show_tasks = Task.objects.filter(task_status=status)
+        return render(request, 'all_tasks.html', {'tarefas': show_tasks, 'selected_status': status})
 
         

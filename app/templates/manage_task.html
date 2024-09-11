@@ -31,27 +31,15 @@
 
         <label for="task_status">Status da Tarefa:</label>
         <select name="task_status" id="task_status">
-
-            {% if edit_task.task_status == 'Pendente' %}
-            <option value="Pendente">Pendente</option>
-            <option value="Em andamento">Em andamento</option>
-            <option value="Concluído">Concluído</option>
-
-            {% elif edit_task.task_status == 'Em andamento' %}
-            <option value="Em andamento">Em andamento</option>
-            <option value="Pendente">Pendente</option>
-            <option value="Concluído">Concluído</option>
-
-            {% else %}
-            <option value="Concluído">Concluído</option>
-            <option value="Em andamento">Em andamento</option>
-            <option value="Pendente">Pendente</option>
-
-            {% endif %}
+            <option value="Pendente" {% if edit_task.task_status == 'Pendente' %} selected {% endif %}>Pendente</option>
+            <option value="Em andamento" {% if edit_task.task_status == 'Em andamento' %} selected {% endif %} >Em andamento</option>
+            <option value="Concluído" {% if edit_task.task_status == 'Concluído' %} selected {% endif %} >Concluído</option>
         </select>
 
         <input type="submit" value="Editar tarefa">
     </form>
+
+    <button><a style="text-decoration: none;color: black;" href="{% url 'delete_task' edit_task.id %}">Deletar Tarefa</a></button>
 
     <br><br>
     <a href="{% url 'home' %}">Voltar para home</a>

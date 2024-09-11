@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minhas Tarefas</title>
+    <title>Todas as Tarefas</title>
 
     <style>
         table {
@@ -24,11 +24,11 @@
 
 </head>
 <body>
-    <h1>Minhas Tarefas</h1>
+    <h1>Todas as Tarefas</h1>
     
 
 
-    <form action="{% url 'my_tasks' %}" method="POST">
+    <form action="{% url 'all_tasks' %}" method="POST">
         {% csrf_token %}
 
         <label for="status_filter">Filtrar por Status:</label>
@@ -38,7 +38,7 @@
             <option value="Concluído" {% if selected_status == 'Concluído' %}selected{% endif %}>Concluído</option>
         </select>
         <input type="submit" value="Filtrar">
-        <button><a href="{% url 'my_tasks' %}" style="text-decoration: none;color: black">Limpar</a></button>
+        <button><a href="{% url 'all_tasks' %}" style="text-decoration: none;color: black">Limpar</a></button>
     </form>
     
 
@@ -46,24 +46,22 @@
         <thead>
             <tr>
                 <th>Nome da Tarefa</th>
-                <th>Descrição</th>
                 <th>Status</th>
-                <th>Gerenciamento</th>
+                <th>Descrição</th>
+                <th>Usuário</th>
             </tr>
         </thead>
         <tbody>
             {% for tarefa in tarefas %}
                 <tr>
                     <td>{{ tarefa.task_name }}</td>
-                    <td>{{ tarefa.task_desc }}</td>
                     <td>{{ tarefa.task_status }}</td>
-                    <td>
-                        <a href="{% url 'manage_task' tarefa.id %}">Editar Tarefa</a>
-                    </td>
+                    <td>{{ tarefa.task_desc }}</td>
+                    <td>{{ tarefa.assigned_to }}</td>
                 </tr>
             {% empty %}
                 <tr>
-                    <td colspan="4">Você não tem tarefas.</td>
+                    <td colspan="5">Não há tarefas</td>
                 </tr>
             {% endfor %}
         </tbody>
