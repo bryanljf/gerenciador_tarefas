@@ -26,8 +26,7 @@
 <body>
     <h1>Minhas Tarefas</h1>
     
-
-
+    <!--Filtro das tarefas, mantém selecionado a opção filtrada-->
     <form action="{% url 'my_tasks' %}" method="POST">
         {% csrf_token %}
 
@@ -41,6 +40,7 @@
         <button><a href="{% url 'my_tasks' %}" style="text-decoration: none;color: black">Limpar</a></button>
     </form>
     
+    <!--Tabela de tarefas, com opção de edição da tarefa-->
 
     <table>
         <thead>

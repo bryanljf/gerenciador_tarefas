@@ -4,8 +4,9 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth import logout as logout_django
 from django.contrib.auth.models import User
-from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
+# Reponsável por cadastrar um novo usuário, fazendo a validação dos dados
 def signup(request):
     if request.method == "GET":
         return render(request, 'signup.html')
@@ -30,7 +31,7 @@ def signup(request):
 
             return render(request, 'login.html')
 
-
+# Autentica o login, consultando se as credenciais são válidas
 def login(request):
     if request.method == "GET":
         return render(request, 'login.html')
@@ -45,11 +46,13 @@ def login(request):
             return render(request, 'home.html')
         else:
             return HttpResponse('Username ou senha inválido!')
-        
+
+#Lista todos os usuários do sistema 
 def user_list(request):
     all_users = User.objects.all()
     return render(request, 'user_list.html', {'usuarios': all_users})
 
+#Logout do usuário
 def logout(request):
     logout_django(request)
     return redirect('login')

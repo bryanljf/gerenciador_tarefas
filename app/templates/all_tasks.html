@@ -25,9 +25,8 @@
 </head>
 <body>
     <h1>Todas as Tarefas</h1>
-    
 
-
+    <!--Filtro das tarefas, mantém selecionado a opção filtrada-->
     <form action="{% url 'all_tasks' %}" method="POST">
         {% csrf_token %}
 
@@ -42,7 +41,8 @@
     </form>
     
 
-    <table>
+    <!--Tabela de todas as tarefas dos usuários do sistema-->
+    <table>s
         <thead>
             <tr>
                 <th>Nome da Tarefa</th>

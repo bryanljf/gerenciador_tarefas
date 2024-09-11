@@ -1,6 +1,7 @@
 from django.urls import path, include
 from profiles import views
 
+#Rotas da aplicação Profiles
 urlpatterns = [
     path('signup', views.signup, name = 'signup'),
     path('login', views.login, name = 'login'),

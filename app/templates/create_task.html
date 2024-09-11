@@ -8,6 +8,8 @@
 <body>
     <h1>Criar Tarefa</h1>
 
+    <!--Formulário para criação de tarefas-->
+
     <form action="{% url 'create_task' %}" method="POST">
         {% csrf_token %}
 

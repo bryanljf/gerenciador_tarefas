@@ -7,6 +7,8 @@
 </head>
 <body>
     <h1>Gerenciar Minhas Tarefas</h1>
+
+    <!--Formulário para edição da tarefa em específico-->
     
     <form action="{% url 'manage_task' edit_task.id %}" method="POST">
         {% csrf_token %}
@@ -39,6 +41,7 @@
         <input type="submit" value="Editar tarefa">
     </form>
 
+    <!--Botão para deletar a tarefa-->
     <button><a style="text-decoration: none;color: black;" href="{% url 'delete_task' edit_task.id %}">Deletar Tarefa</a></button>
 
     <br><br>

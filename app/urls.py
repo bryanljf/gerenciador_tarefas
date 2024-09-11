@@ -1,6 +1,8 @@
 from django.urls import path
 from app import views
 
+#Rotas utilizadas na aplicação 'app'
+
 urlpatterns = [
     path('create_task', views.create_task, name='create_task'),
     path('home', views.home, name='home'),
