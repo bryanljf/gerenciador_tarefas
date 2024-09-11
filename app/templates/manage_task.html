@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Minhas Tarefas</title>
+</head>
+<body>
+    <h1>Gerenciar Minhas Tarefas</h1>
+    
+    <form action="{% url 'manage_task' edit_task.id %}" method="POST">
+        {% csrf_token %}
+
+        <label for="task_name">Nome da Tarefa:</label>    
+        <input type="Text" name="task_name" id="task_name" value="{{ edit_task.task_name }}">
+        <br><br>
+
+        <label for="task_desc">Descrição da Tarefa: </label>
+        <input type="Text" name="task_desc" id="task_desc" value="{{ edit_task.task_desc }}">
+        <br><br>
+
+        <label for="assigned_to">Atribuição da Tarefa:</label> 
+        <select name="assigned_to" id="assigned_to">
+            <option value="{{ request.user }}">{{ request.user }}</option>
+            {% for usuario in usuarios %}
+            {% if usuario != request.user %}
+            <option value="{{ usuario.username }}">{{ usuario.username }}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+
+        <label for="task_status">Status da Tarefa:</label>
+        <select name="task_status" id="task_status">
+
+            {% if edit_task.task_status == 'Pendente' %}
+            <option value="Pendente">Pendente</option>
+            <option value="Em andamento">Em andamento</option>
+            <option value="Concluído">Concluído</option>
+
+            {% elif edit_task.task_status == 'Em andamento' %}
+            <option value="Em andamento">Em andamento</option>
+            <option value="Pendente">Pendente</option>
+            <option value="Concluído">Concluído</option>
+
+            {% else %}
+            <option value="Concluído">Concluído</option>
+            <option value="Em andamento">Em andamento</option>
+            <option value="Pendente">Pendente</option>
+
+            {% endif %}
+        </select>
+
+        <input type="submit" value="Criar tarefa">
+    </form>
+
+    <br><br>
+    <a href="{% url 'home' %}">Voltar para home</a>
+        
+    </select>
+</body>
+</html>

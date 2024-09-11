@@ -10,7 +10,7 @@
 
     <ul>
         {% for usuario in usuarios %}
-            <li>{{ usuario.username }} ({{ usuario.email }}) {{usuario.password}}</li>
+            <li>{{ usuario.username }} ({{ usuario.email }})</li>
         {% empty %}
             <li>Nenhum usuário encontrado.</li>
         {% endfor %}
