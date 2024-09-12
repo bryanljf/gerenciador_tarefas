@@ -1,38 +1,49 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Tarefa</title>
+    <link rel="stylesheet" href="{% static 'app.css' %}">
+    <!-- parte abaixo é sobre a fonte que carrega do google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+  
 </head>
 <body>
-    <h1>Criar Tarefa</h1>
 
-    <!--Formulário para criação de tarefas-->
+    <div class="profile-container">
+        <h1>Criar Tarefa</h1>
 
-    <form action="{% url 'create_task' %}" method="POST">
-        {% csrf_token %}
-
-        <label for="task_name">Nome da Tarefa:</label>    
-        <input type="Text" name="task_name" id="task_name">
-        <br><br>
-
-        <label for="task_desc">Descrição da Tarefa: </label>
-        <input type="Text" name="task_desc" id="task_desc">
-        <br><br>
-
-        <label for="assigned_to">Atribuição da Tarefa:</label> 
-        <select name="assigned_to" id="assigned_to">
-            <option value="">Selecionar Usuário</option>
-            {% for usuario in usuarios %}
-            <option value="{{ usuario.username }}">{{ usuario.username }}</option>
-            {% endfor %}
-        </select>
-
-        <input type="submit" value="Criar tarefa">
-        <br><br>
-        <a href="{% url 'home' %}">Voltar para home</a>
-    </form>
-
+        <!--Formulário para criação de tarefas-->
+    
+        <form action="{% url 'create_task' %}" method="POST">
+            {% csrf_token %}
+    
+            <label for="task_name">Nome da Tarefa:</label>    
+            <input type="Text" name="task_name" id="task_name">
+            <br><br>
+    
+            <label for="task_desc">Descrição da Tarefa: </label>
+            <input type="Text" name="task_desc" id="task_desc">
+            <br><br>
+    
+            <label for="assigned_to">Atribuição da Tarefa:</label> 
+            <select name="assigned_to" id="assigned_to">
+                <option value="">Selecionar Usuário</option>
+                {% for usuario in usuarios %}
+                <option value="{{ usuario.username }}">{{ usuario.username }}</option>
+                {% endfor %}
+            </select>
+    
+            <input type="submit" value="Criar tarefa">
+            <br><br>
+            <a href="{% url 'home' %}">Voltar para home</a>
+        </form>
+    </div>
+   
 </body>
 </html>

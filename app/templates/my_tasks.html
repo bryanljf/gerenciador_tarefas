@@ -1,10 +1,17 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minhas Tarefas</title>
-
+    <link rel="stylesheet" href="{% static 'app.css' %}">
+    <!-- parte abaixo é sobre a fonte que carrega do google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+  
     <style>
         table {
             width: 100%;
@@ -24,53 +31,56 @@
 
 </head>
 <body>
-    <h1>Minhas Tarefas</h1>
+    <div class="profile-container">
+        <h1>Minhas Tarefas</h1>
     
-    <!--Filtro das tarefas, mantém selecionado a opção filtrada-->
-    <form action="{% url 'my_tasks' %}" method="POST">
-        {% csrf_token %}
-
-        <label for="status_filter">Filtrar por Status:</label>
-        <select name="status_filter" id="status_filter">
-            <option value="Pendente" {% if selected_status == 'Pendente' %}selected{% endif %}>Pendente</option>
-            <option value="Em andamento" {% if selected_status == 'Em andamento' %}selected{% endif %}>Em andamento</option>
-            <option value="Concluído" {% if selected_status == 'Concluído' %}selected{% endif %}>Concluído</option>
-        </select>
-        <input type="submit" value="Filtrar">
-        <button><a href="{% url 'my_tasks' %}" style="text-decoration: none;color: black">Limpar</a></button>
-    </form>
+        <!--Filtro das tarefas, mantém selecionado a opção filtrada-->
+        <form action="{% url 'my_tasks' %}" method="POST">
+            {% csrf_token %}
     
-    <!--Tabela de tarefas, com opção de edição da tarefa-->
-
-    <table>
-        <thead>
-            <tr>
-                <th>Nome da Tarefa</th>
-                <th>Descrição</th>
-                <th>Status</th>
-                <th>Gerenciamento</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for tarefa in tarefas %}
+            <label for="status_filter">Filtrar por Status:</label>
+            <select name="status_filter" id="status_filter">
+                <option value="Pendente" {% if selected_status == 'Pendente' %}selected{% endif %}>Pendente</option>
+                <option value="Em andamento" {% if selected_status == 'Em andamento' %}selected{% endif %}>Em andamento</option>
+                <option value="Concluído" {% if selected_status == 'Concluído' %}selected{% endif %}>Concluído</option>
+            </select>
+            <input type="submit" value="Filtrar">
+            <button><a href="{% url 'my_tasks' %}" style="text-decoration: none;color: black">Limpar</a></button>
+        </form>
+        
+        <!--Tabela de tarefas, com opção de edição da tarefa-->
+    
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ tarefa.task_name }}</td>
-                    <td>{{ tarefa.task_desc }}</td>
-                    <td>{{ tarefa.task_status }}</td>
-                    <td>
-                        <a href="{% url 'manage_task' tarefa.id %}">Editar Tarefa</a>
-                    </td>
+                    <th>Nome da Tarefa</th>
+                    <th>Descrição</th>
+                    <th>Status</th>
+                    <th>Gerenciamento</th>
                 </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="4">Você não tem tarefas.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <br>
-    <a href="{% url 'home' %}">Voltar para a home</a>
-
+            </thead>
+            <tbody>
+                {% for tarefa in tarefas %}
+                    <tr>
+                        <td>{{ tarefa.task_name }}</td>
+                        <td>{{ tarefa.task_desc }}</td>
+                        <td>{{ tarefa.task_status }}</td>
+                        <td>
+                            <a href="{% url 'manage_task' tarefa.id %}">Editar Tarefa</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4">Você não tem tarefas.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+        <br>
+        <a href="{% url 'home' %}">Voltar para a home</a>
+    
+    </div>
+    
 </body>
 </html>

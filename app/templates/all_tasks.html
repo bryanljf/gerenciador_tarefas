@@ -1,10 +1,17 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todas as Tarefas</title>
-
+    <link rel="stylesheet" href="{% static 'app.css' %}">
+    <!-- parte abaixo é sobre a fonte que carrega do google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+  
     <style>
         table {
             width: 100%;
@@ -24,7 +31,9 @@
 
 </head>
 <body>
-    <h1>Todas as Tarefas</h1>
+
+    <div class="profile-container">
+        <h1>Todas as Tarefas</h1>
 
     <!--Filtro das tarefas, mantém selecionado a opção filtrada-->
     <form action="{% url 'all_tasks' %}" method="POST">
@@ -42,7 +51,7 @@
     
 
     <!--Tabela de todas as tarefas dos usuários do sistema-->
-    <table>s
+    <table>
         <thead>
             <tr>
                 <th>Nome da Tarefa</th>
@@ -70,5 +79,7 @@
     <br>
     <a href="{% url 'home' %}">Voltar para a home</a>
 
+    </div>
+    
 </body>
 </html>

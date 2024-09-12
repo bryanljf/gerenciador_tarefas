@@ -11,6 +11,11 @@ def home(request):
 
 # Cria uma nova tarefa, conforme especificações do usuário
 @login_required
+
+#bom fazer um try catch aq já que, caso coloque atribulação null da erro
+# da pra fazer q caso seje nulo, ele envie automaticamente para o próprio usuario
+
+#caso a atribuição fique null, nas minhas tarefas de todos os user aparece aquela tarefa
 def create_task(request):
     if request.method == "GET":
         all_users = User.objects.all()
@@ -24,6 +29,7 @@ def create_task(request):
         task.save()
 
         return HttpResponse('Tarefa criada com sucesso') 
+        
 
 # Lista as tarefas do usuário logado, conforme a filtragem desejada
 @login_required

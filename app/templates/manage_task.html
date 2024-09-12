@@ -1,52 +1,69 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciar Minhas Tarefas</title>
+    <link rel="stylesheet" href="{% static 'app.css' %}">
+    <!-- parte abaixo é sobre a fonte que carrega do google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+
 </head>
+
 <body>
-    <h1>Gerenciar Minhas Tarefas</h1>
 
-    <!--Formulário para edição da tarefa em específico-->
-    
-    <form action="{% url 'manage_task' edit_task.id %}" method="POST">
-        {% csrf_token %}
+    <div class="profile-container">
+        <h1>Gerenciar Minhas Tarefas</h1>
 
-        <label for="task_name">Nome da Tarefa:</label>    
-        <input type="Text" name="task_name" id="task_name" value="{{ edit_task.task_name }}">
+        <!--Formulário para edição da tarefa em específico-->
+
+        <form action="{% url 'manage_task' edit_task.id %}" method="POST">
+            {% csrf_token %}
+
+            <label for="task_name">Nome da Tarefa:</label>
+            <input type="text" name="task_name" id="task_name" value="{{ edit_task.task_name }}">
+            <br><br>
+
+            <label for="task_desc">Descrição da Tarefa: </label>
+            <input type="text" name="task_desc" id="task_desc" value="{{ edit_task.task_desc }}">
+            <br><br>
+
+            <label for="assigned_to">Atribuição da Tarefa:</label>
+            <select name="assigned_to" id="assigned_to">
+                <option value="{{ request.user }}">{{ request.user }}</option>
+                {% for usuario in usuarios %}
+                {% if usuario != request.user %}
+                <option value="{{ usuario.username }}">{{ usuario.username }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+            <br><br>
+
+            <label for="task_status">Status da Tarefa:</label>
+            <select name="task_status" id="task_status">
+                <option value="Pendente" {% if edit_task.task_status == 'Pendente' %} selected {% endif %}>Pendente</option>
+                <option value="Em andamento" {% if edit_task.task_status == 'Em andamento' %} selected {% endif %}>Em andamento</option>
+                <option value="Concluído" {% if edit_task.task_status == 'Concluído' %} selected {% endif %}>Concluído</option>
+            </select>
+            <br><br>
+
+            <input type="submit" value="Editar tarefa">
+        </form>
+
+        <!--Botão para deletar a tarefa-->
+        <button class="button-hover">
+            <a style="text-decoration: none; color: black;" href="{% url 'delete_task' edit_task.id %}">Deletar Tarefa</a>
+        </button>
+
         <br><br>
+        <a href="{% url 'home' %}">Voltar para home</a>
+    </div>
 
-        <label for="task_desc">Descrição da Tarefa: </label>
-        <input type="Text" name="task_desc" id="task_desc" value="{{ edit_task.task_desc }}">
-        <br><br>
-
-        <label for="assigned_to">Atribuição da Tarefa:</label> 
-        <select name="assigned_to" id="assigned_to">
-            <option value="{{ request.user }}">{{ request.user }}</option>
-            {% for usuario in usuarios %}
-            {% if usuario != request.user %}
-            <option value="{{ usuario.username }}">{{ usuario.username }}</option>
-            {% endif %}
-            {% endfor %}
-        </select>
-
-        <label for="task_status">Status da Tarefa:</label>
-        <select name="task_status" id="task_status">
-            <option value="Pendente" {% if edit_task.task_status == 'Pendente' %} selected {% endif %}>Pendente</option>
-            <option value="Em andamento" {% if edit_task.task_status == 'Em andamento' %} selected {% endif %} >Em andamento</option>
-            <option value="Concluído" {% if edit_task.task_status == 'Concluído' %} selected {% endif %} >Concluído</option>
-        </select>
-
-        <input type="submit" value="Editar tarefa">
-    </form>
-
-    <!--Botão para deletar a tarefa-->
-    <button><a style="text-decoration: none;color: black;" href="{% url 'delete_task' edit_task.id %}">Deletar Tarefa</a></button>
-
-    <br><br>
-    <a href="{% url 'home' %}">Voltar para home</a>
-        
-    </select>
 </body>
+
 </html>
