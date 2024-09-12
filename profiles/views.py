@@ -20,10 +20,14 @@ def signup(request):
         mail = User.objects.filter(email=email).first()
 
         if user or mail:
-            return HttpResponse('O usuário ou e-mail já foi cadastrado anteriormente...')
+            valid_key = 0
+            valid_pw = 1
+            return render(request, 'signup.html', {'valid_key' : valid_key, 'valid_pw': valid_pw})
 
         elif len(password) < min_len:
-            return HttpResponse('A senha deve ter no mínimo 8 carácteres...')
+            valid_key = 1
+            valid_pw = 0
+            return render(request, 'signup.html', {'valid_key' : valid_key, 'valid_pw': valid_pw})
     
         else:
             user = User.objects.create_user(username=username, email=email, password=password)
@@ -45,7 +49,8 @@ def login(request):
             login_django(request, user)
             return render(request, 'home.html')
         else:
-            return HttpResponse('Username ou senha inválido!')
+            valid_key = 0
+            return render(request, 'login.html', {'valid_key': valid_key})
 
 #Lista todos os usuários do sistema 
 def user_list(request):

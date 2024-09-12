@@ -32,6 +32,14 @@
                   
     </form> 
 
+    {% if valid_key == 0 %}
+    <p style="color: red;">Usuário ou E-mail já cadastrado(s)</p>
+    {% endif %}
+
+    {% if valid_pw == 0 %}
+    <p style="color: red;">A senha válida deve ter no mínimo 8 dígitos</p>
+    {% endif %}
+
     <a href="{% url 'login' %}">Voltar</a>
 
     </div>

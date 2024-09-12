@@ -30,6 +30,10 @@
                       <input type="submit" value="Fazer Login">
                       <a href="{% url 'signup' %}">Registrar-se</a>
         </form>
+
+        {% if valid_key == 0 %}
+        <p style="color: red;">Usuário ou senha incorreto/inexistente</p>
+        {% endif %}
     </div>  
     
 </body>

@@ -14,18 +14,18 @@
 </head>
 <body>
     <div class="profile-container">
-        <h1>Lista de usuarios</h1>
+        <h1>Lista de Usuários</h1>
 
     <!--Lista de usuários do sistema-->
     <ul>
         {% for usuario in usuarios %}
             <li>{{ usuario.username }} ({{ usuario.email }})</li>
         {% empty %}
-            <li>Nenhum usuário encontrado.</li>
+            <li>Nenhum usuário encontrado</li>
         {% endfor %}
     </ul>
 
-    <a href="{% url 'home' %}">Ir para home</a>
+    <a href="{% url 'home' %}">Voltar para a home</a>
     </div>
 </body>
 </html>

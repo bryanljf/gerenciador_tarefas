@@ -38,9 +38,11 @@
                 <option value="{{ usuario.username }}">{{ usuario.username }}</option>
                 {% endfor %}
             </select>
-    
+
+            <br><br>
             <input type="submit" value="Criar tarefa">
             <br><br>
+            
             <a href="{% url 'home' %}">Voltar para home</a>
         </form>
     </div>
