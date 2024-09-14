@@ -1,28 +1,40 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="{% static 'profiles.css' %}">
+    <!-- parte abaixo é sobre a fonte que carrega do google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <h1>Tela de login</h1>
 
-    <!--Formulário de Login-->
+    <div class="profile-container">
+        <h1>LOGIN</h1>
 
-    <form action="{% url 'login' %}" method="POST">
-        {% csrf_token %}
-        
-        Username: <input type="text" name="username" required>
-                  <br><br>
-        Senha:    <input type="password" name="password" required>
-                  <br><br>
-                  <input type="submit" value="Fazer Login">
+        <!--Formulário de Login-->
+    
+        <form action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            
+            Username: <input type="text" name="username" required>
+                      <br><br>
+            Senha:    <input type="password" name="password" required>
+                      <br><br>
+                      <input type="submit" value="Fazer Login">
+                      <a href="{% url 'signup' %}">Registrar-se</a>
+        </form>
 
-    </form>
-
-    <br>
-    <a href="{% url 'signup' %}">Registrar-se</a>
+        {% if valid_key == 0 %}
+        <p style="color: red;">Usuário ou senha incorreto/inexistente</p>
+        {% endif %}
+    </div>  
     
 </body>
 </html>

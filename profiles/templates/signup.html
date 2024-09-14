@@ -1,12 +1,21 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
+    <link rel="stylesheet" href="{% static 'profiles.css' %}">
+    <!-- parte abaixo é sobre a fonte que carrega do google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <h1>Tela de cadastro</h1>
+
+    <div class="profile-container">
+        <h1>CADASTRO</h1>
 
     <!--Formulário de cadastro-->
 
@@ -23,6 +32,17 @@
                   
     </form> 
 
+    {% if valid_key == 0 %}
+    <p style="color: red;">Usuário ou E-mail já cadastrado(s)</p>
+    {% endif %}
+
+    {% if valid_pw == 0 %}
+    <p style="color: red;">A senha válida deve ter no mínimo 8 dígitos</p>
+    {% endif %}
+
     <a href="{% url 'login' %}">Voltar</a>
+
+    </div>
+
 </body>
 </html>

@@ -1,10 +1,17 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todas as Tarefas</title>
-
+    <link rel="stylesheet" href="{% static 'app.css' %}">
+    <!-- parte abaixo é sobre a fonte que carrega do google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+  
     <style>
         table {
             width: 100%;
@@ -24,7 +31,9 @@
 
 </head>
 <body>
-    <h1>Todas as Tarefas</h1>
+
+    <div class="profile-container">
+        <h1>Todas as Tarefas</h1>
 
     <!--Filtro das tarefas, mantém selecionado a opção filtrada-->
     <form action="{% url 'all_tasks' %}" method="POST">
@@ -39,36 +48,43 @@
         <input type="submit" value="Filtrar">
         <button><a href="{% url 'all_tasks' %}" style="text-decoration: none;color: black">Limpar</a></button>
     </form>
-    
+    <br>
 
     <!--Tabela de todas as tarefas dos usuários do sistema-->
-    <table>s
+    <table>
         <thead>
             <tr>
-                <th>Nome da Tarefa</th>
-                <th>Status</th>
-                <th>Descrição</th>
-                <th>Usuário</th>
+                <th class="table-head">Nome da Tarefa</th>
+                <th class="table-head">Status</th>
+                <th class="table-head">Descrição</th>
+                <th class="table-head">Usuário</th>
             </tr>
         </thead>
         <tbody>
             {% for tarefa in tarefas %}
                 <tr>
-                    <td>{{ tarefa.task_name }}</td>
-                    <td>{{ tarefa.task_status }}</td>
-                    <td>{{ tarefa.task_desc }}</td>
-                    <td>{{ tarefa.assigned_to }}</td>
+                    <td class="table-text" >{{ tarefa.task_name }}</td>
+                    <td class="table-text" 
+                    {% if tarefa.task_status == 'Pendente' %}style="color:#810a0a"{% endif %}
+                    {% if tarefa.task_status == 'Em andamento' %}style="color:#0d2aad"{% endif %}
+                    {% if tarefa.task_status == 'Concluído' %}style="color:#09962c"{% endif %}>
+                    {{ tarefa.task_status }}
+                    </td>
+                    <td class="table-text" style="width: 20%;">{{ tarefa.task_desc }}</td>
+                    <td class="table-text">{{ tarefa.assigned_to }}</td>
                 </tr>
             {% empty %}
                 <tr>
-                    <td colspan="5">Não há tarefas</td>
+                    <td style="text-align: center;" colspan="5">Não há tarefas</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
     <br>
-    <a href="{% url 'home' %}">Voltar para a home</a>
+    <a href="{% url 'home' %}">Voltar</a>
 
+    </div>
+    
 </body>
 </html>

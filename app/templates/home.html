@@ -1,26 +1,32 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="{% static 'app.css' %}">
+    <!-- parte abaixo é sobre a fonte que carrega do google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>
-        Página inicial 'home' -> Construir tela contendo opções de Menu principal
-    </h1>
-        <p>Olá, {{ request.user }}</p>
+    <div class="profile-container">
+        <h1>Olá, {{ request.user }}!</h1>
         <br>
-        <a href="{% url 'user_list' %}">Ir para lista de usuarios</a>
+        <button class="button-menu"><a style="text-decoration: none; color: white;" href="{% url 'create_task' %}">Criar Nova Tarefa</a></button>
         <br>
-        <a href="{% url 'create_task' %}">Ir para criação de tarefas</a>
+        <button class="button-menu"><a style="text-decoration: none; color: white;" href="{% url 'my_tasks' %}">Minhas Tarefas</a></button>
         <br>
-        <a href="{% url 'my_tasks' %}">Ir para minhas tarefas</a>
+        <button class="button-menu"><a style="text-decoration: none; color: white;" href="{% url 'all_tasks' %}">Todas as Tarefas</a></button>
         <br>
-        <a href="{% url 'all_tasks' %}">Ir para todas as tarefas</a>
+        <button class="button-menu"><a style="text-decoration: none; color: white;" href="{% url 'user_list' %}">Lista de Usuários</a></button>
         <br><br><br>
-        <button>
-            <a href="{% url 'logout' %}" style="text-decoration: none;color: black;">Logout</a>
+        <button class="button-hover">
+            <a href="{% url 'logout' %}" style="text-decoration: none; color: black;">Logout</a>
         </button>
+    </div>
 </body>
 </html>

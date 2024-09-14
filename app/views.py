@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -19,12 +18,19 @@ def create_task(request):
         task_name = request.POST.get('task_name')
         task_desc = request.POST.get('task_desc')
         assigned_to_username = request.POST.get('assigned_to')
-        assigned_to = User.objects.filter(username=assigned_to_username).first()
+
+        if assigned_to_username == "":
+            assigned_to = request.user
+        else:
+            assigned_to = User.objects.filter(username=assigned_to_username).first()
+            
         task = Task.objects.create(task_name=task_name, task_desc=task_desc, assigned_to=assigned_to)
         task.save()
 
-        return HttpResponse('Tarefa criada com sucesso') 
+        all_tasks = Task.objects.filter(assigned_to=request.user)
 
+        return render(request, 'my_tasks.html', {'tarefas': all_tasks})
+        
 # Lista as tarefas do usuário logado, conforme a filtragem desejada
 @login_required
 def my_tasks(request):

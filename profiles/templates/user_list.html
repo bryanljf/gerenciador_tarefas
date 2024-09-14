@@ -1,22 +1,31 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Usuarios</title>
+    <link rel="stylesheet" href="{% static 'profiles.css' %}">
+    <!-- parte abaixo é sobre a fonte que carrega do google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
+  
 </head>
 <body>
-    <h1>Lista de usuarios</h1>
+    <div class="profile-container">
+        <h1>Lista de Usuários</h1>
 
     <!--Lista de usuários do sistema-->
     <ul>
         {% for usuario in usuarios %}
             <li>{{ usuario.username }} ({{ usuario.email }})</li>
         {% empty %}
-            <li>Nenhum usuário encontrado.</li>
+            <li>Nenhum usuário encontrado</li>
         {% endfor %}
     </ul>
 
-    <a href="{% url 'home' %}">Ir para home</a>
+    <a href="{% url 'home' %}">Voltar</a>
+    </div>
 </body>
 </html>
