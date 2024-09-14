@@ -50,35 +50,40 @@
         <br>
 
         <!--Tabela de tarefas, com opção de edição da tarefa-->
-        <table>
-            <thead>
+        <table style="border: none">
+            <thead >
                 <tr>
-                    <th>Nome da Tarefa</th>
-                    <th>Descrição</th>
-                    <th>Status</th>
-                    <th>Gerenciamento</th>
+                    <th class="table-head">Nome da Tarefa</th>
+                    <th class="table-head">Status</th>
+                    <th class="table-head">Descrição</th>
+                    <th class="table-head">Gerenciamento</th>
                 </tr>
             </thead>
             <tbody>
                 {% for tarefa in tarefas %}
                     <tr>
-                        <td>{{ tarefa.task_name }}</td>
-                        <td>{{ tarefa.task_desc }}</td>
-                        <td>{{ tarefa.task_status }}</td>
-                        <td>
-                            <a href="{% url 'manage_task' tarefa.id %}">Editar Tarefa</a>
+                        <td class="table-text" >{{ tarefa.task_name }}</td>
+                        <td class="table-text" 
+                        {% if tarefa.task_status == 'Pendente' %}style="color:#810a0a"{% endif %}
+                        {% if tarefa.task_status == 'Em andamento' %}style="color:#0d2aad"{% endif %}
+                        {% if tarefa.task_status == 'Concluído' %}style="color:#09962c"{% endif %}>
+                        {{ tarefa.task_status }}
+                        </td>
+                        <td class="table-text" style="width: 20%;">{{ tarefa.task_desc }}</td>
+                        <td style="text-align: center;"> 
+                            <a style="text-decoration: none;color: #6a0dad;padding: 3;" href="{% url 'manage_task' tarefa.id %}">Editar Tarefa</a>
                         </td>
                     </tr>
                 {% empty %}
                     <tr>
-                        <td style="text-align: center;" colspan="4">Você não possui tarefas</td>
+                        <td style="text-align: center;padding: 3;" colspan="4">Você não possui tarefas</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     
         <br>
-        <a href="{% url 'home' %}">Voltar para a home</a>
+        <a href="{% url 'home' %}">Voltar</a>
     
     </div>
     

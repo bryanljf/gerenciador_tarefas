@@ -4,13 +4,13 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #522c8f; /* Cor de fundo */
+    background-color: #522c8f; 
     margin: 0;
 }
 
 .profile-container {
     text-align: center;
-    background: rgba(255, 255, 255, 0.8); /* Fundo branco com transparência */
+    background: rgba(255, 255, 255, 0.8); 
     padding-left: 10vw;
     padding-right: 10vw;
     padding-top: 2vh;
@@ -22,3 +22,89 @@ body {
 .profile-container a {
     padding-top: 2;
 }
+
+.button-menu {
+    background-color: #6a0dad;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    margin: 10px;
+}
+
+.button-menu:hover {
+    background-color: #8a2be2;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+.button-menu:active {
+    background-color: #5a0b8d;
+    transform: scale(0.98);
+}
+
+.table-text {
+    text-align: center;
+}
+
+.table-head {
+    background-color: #6a0dad;
+    color: white;
+    text-align: center;
+}
+
+.main-button {
+    width: 170px;
+    font-size: 16px;
+    background: linear-gradient(45deg, #8a2be2, #6a0dad);
+    color: white;
+    border: 2px solid transparent;
+    padding: 5px 28px; /* Ajuste no padding */
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.main-button:hover {
+    background: linear-gradient(45deg, #9f49f5, #7d30c1);
+    border: 2px solid #fff;
+    box-shadow: 0 8px 20px rgba(123, 39, 197, 0.5);
+    transform: translateY(-3px);
+}
+
+.main-button:active {
+    background: linear-gradient(45deg, #7d30c1, #6a0dad);
+    transform: translateY(0);
+    box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+}
+
+.form-container {
+    margin: auto;
+    width: 250px;
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"] {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
